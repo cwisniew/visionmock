@@ -2,6 +2,8 @@ package net.rptools.maptool.vision;
 
 import javafx.geometry.Point2D;
 
+import java.util.Objects;
+
 
 public class LineSegment {
     private final Point2D point1;
@@ -79,12 +81,10 @@ public class LineSegment {
         // intersects the line we have to check 0 <= line_t <= 1 (the distance along the line from line_p in direction line_d).
         // and for the ray check ray_t >= 0 only as the ray stretches to infinity in one direction.
         if (ray_t < 0) {
-            //System.out.println("Behind Ray");
             return null;
         }
 
         if (line_t < 0 || line_t > 1) {
-            //System.out.println("Outside line");
             return null;
         }
 
@@ -97,6 +97,18 @@ public class LineSegment {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LineSegment that = (LineSegment) o;
+        return Objects.equals(point1, that.point1) &&
+                Objects.equals(point2, that.point2);
+    }
 
-    // TODO add hash and equals
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(point1, point2);
+    }
 }
