@@ -7,11 +7,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A simple class that used to maintain the list of polygons that block vision/light.
+ *
+ * This class does a bit more than just maintain the list, it also provides convenient methods for extracting just the
+ * vertices or lines that make up the vision/light blocking.
+ */
 public class VisionBlockingPolygonList {
+    /** List of {@link VisionBlockingPolygon}s that is being managed. */
     private final List<VisionBlockingPolygon> polygonList = new ArrayList<>();
+    /** List of unique vertices for vision/light blocking polygons. */
     private final Set<Point2D> vertices = new HashSet<>();
+    /** List of unique lines that make up the vision/light blocking polygons. */
     private final Set<LineSegment> lineSegments = new HashSet<>();
 
+    /**
+     * Add some simple polygons to the scene for testing.
+     *
+     * @param width the width of the scene for the bounding polygon.
+     * @param height the height of the scene for the bounding polygon.
+     */
     public void addDemoPoly(int width, int height) {
         addVisionBlockingPolygon(
                 new VisionBlockingPolygon(
@@ -136,24 +151,44 @@ public class VisionBlockingPolygonList {
     }
 
 
+    /**
+     * Adds a vision/light blocking polygon to the scene.
+     * @param poly the polygon to add.
+     */
     public void addVisionBlockingPolygon(VisionBlockingPolygon poly) {
         polygonList.add(poly);
         vertices.addAll(poly.getVertices());
         lineSegments.addAll(poly.getLineSegements());
     }
 
+    /**
+     * Returns a list of vision/light blocking polygons in the scene.
+     * @return the list of polygons.
+     */
     public List<VisionBlockingPolygon> getPolygonList() {
         return polygonList;
     }
 
+    /**
+     * Returns the number of vertices for vision/light blocking polygons in the scene.
+     * @return the number of vertices in the scene.
+     */
     public int getNumberVertices() {
         return vertices.size();
     }
 
+    /**
+     * Returns the vertices for vision/light blocking polygons in the scene.
+     * @return the vertices in the scene.
+     */
     public Set<Point2D> getVertices() {
         return vertices;
     }
 
+    /**
+     * Returns the lights that make up the vision/light blocking polygons.
+     * @return the lines that make up the polygons.
+     */
     public Set<LineSegment> getLineSegments() {
         return lineSegments;
     }

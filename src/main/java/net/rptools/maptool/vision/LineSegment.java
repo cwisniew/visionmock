@@ -5,25 +5,55 @@ import javafx.geometry.Point2D;
 import java.util.Objects;
 
 
+/**
+ * A class representing lines and providing methods for dealing with it.
+ */
 public class LineSegment {
+    /** The starting point for the line. */
     private final Point2D point1;
+    /** The ending point for the line. */
     private final Point2D point2;
 
+    /**
+     * Creates a new <code>LineSegment</code>
+     * @param p1 The starting point of the line.
+     * @param p2 The ending point of the line.
+     */
     public LineSegment(Point2D p1, Point2D p2) {
         point1 = p1;
         point2 = p2;
     }
 
 
+    /**
+     * Returns the starting point of the line.
+     * @return the starting point of the line.
+     */
     public Point2D getPoint1() {
         return point1;
     }
 
+    /**
+     * Returns the ending point of the line.
+     * @return the ending point of the line.
+     */
     public Point2D getPoint2() {
         return point2;
     }
 
 
+    /**
+     * Returns the intersection point of this line and the provided "ray" <code>LineSegment</code>.
+     * The ray is considered to extend past the end point to infinity.
+     *
+     * If there is no intersection <code>null</code> is returned.
+     *
+     * @param ray The ray to test for intersection.
+     * @param angle The angle the ray makes. This is not used in calculations but is set in the
+     *              {@link LineIntersection} returned to enable easier sorting by angle when intersctions
+     *              are compared.
+     * @return the intersection of the ray and this line or <code>null</code> if there is no intersection.
+     */
     public LineIntersection getIntersectionWith(LineSegment ray, double angle) {
         // Get the values of the ray to test for intersection in the form
         // ray_x = ray_px + ray_dx
@@ -89,9 +119,10 @@ public class LineSegment {
         }
 
         return new LineIntersection(
+                // see above for how we come by this formula for the point of intersection on the line.
                 new Point2D(ray_px + ray_dx * ray_t, ray_py + ray_dy * ray_t),
-                ray_t,
-                angle
+                ray_t, // distance from the beginning of the ray.
+                angle  // the angle of the ray.
         );
 
 
