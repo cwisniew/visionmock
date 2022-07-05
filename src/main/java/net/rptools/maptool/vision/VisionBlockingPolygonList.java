@@ -158,7 +158,7 @@ public class VisionBlockingPolygonList {
     public void addVisionBlockingPolygon(VisionBlockingPolygon poly) {
         polygonList.add(poly);
         vertices.addAll(poly.getVertices());
-        lineSegments.addAll(poly.getLineSegements());
+        lineSegments.addAll(poly.getLineSegments());
     }
 
     /**

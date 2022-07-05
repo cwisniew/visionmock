@@ -20,7 +20,7 @@ public class VisionBlockingPolygon {
     private final double[] verticesY;
 
     /** The lines that make up the polygon. */
-    private final Set<LineSegment> lineSegements = new HashSet<>();
+    private final Set<LineSegment> lineSegments = new HashSet<>();
 
 
     /**
@@ -45,12 +45,12 @@ public class VisionBlockingPolygon {
         Point2D prevPoint = null;
         for (Point2D p : vertices) {
             if (prevPoint != null) {
-                lineSegements.add(new LineSegment(prevPoint, p));
+                lineSegments.add(new LineSegment(prevPoint, p));
             }
             prevPoint = p;
         }
         // complete the polygon
-        lineSegements.add(new LineSegment(prevPoint, vertices.get(0)));
+        lineSegments.add(new LineSegment(prevPoint, vertices.get(0)));
 
     }
 
@@ -90,7 +90,7 @@ public class VisionBlockingPolygon {
      * Returns the lines that make up the polygon.
      * @return the lines that make up the polygon.
      */
-    public Set<LineSegment> getLineSegements() {
-        return lineSegements;
+    public Set<LineSegment> getLineSegments() {
+        return lineSegments;
     }
 }
